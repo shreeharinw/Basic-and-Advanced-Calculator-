@@ -1,35 +1,35 @@
 let display = document.getElementById("display");
 let buttons = Array.from(document.getElementsByClassName("button"));
 
-buttons.map((button) => {
-  button.addEventListener("click", (e) => {
-    console.log(e.target.innerText);
-    switch (e.target.innerText) {
-      case "C":
-        display.innerText = "";
-        break;
-      case "=":
-        if (display.innerText == "") {
-          alert("no value entered!!");
-        } else {
-          try {
-            display.innerText = eval(display.innerText);
-          } catch {
-            display.innerText = "Error";
-          }
+//filter,map,reduce,forEach
+let x = buttons.map((button)=>{
+    button.addEventListener("click",(e)=>{
+        console.log(e.target.innerText);
+        switch(e.target.innerText){
+            case "C" : display.innerText = "";
+            case "Backspace":
+                if(display.innerText){
+                    display.innerText = display.innerText.substring(0,display.innerText.length-1);
+                }else{
+                    alert("No value entered");
+                }
+            break;
+            case "=":
+                if(display.innerText==""){
+                    alert("No value entered");
+                }else{
+                    try{
+                        display.innerText = eval(display.textContent);
+                    }
+                    catch(e){
+                        console.error(e);
+                        display.innerText = "Error";
+                    }
+                    
+                }
+                break;
+            default: display.innerText+=e.target.innerText;
         }
-        break;
-      case "Backspace":
-        if (display.innerText) {
-          display.innerText = display.innerText.substring(
-            0,
-            display.innerText.length - 1
-          );
-        }
-        break;
-      default: {
-        display.innerText += e.target.innerText;
-      }
-    }
-  });
-});
+    })
+})
+console.log("x is ",x);
